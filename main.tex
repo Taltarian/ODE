@@ -1,0 +1,92 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+
+\title{Ordinary Differential Equations}
+\author{Cole Brabec}
+
+\begin{document}
+\maketitle
+
+
+\section{Introduction}
+During this lab, methods of numerically solving ordinary differential equations were explored. Specifically, three different versions of Euler's method were studied. Each version exhibited its expected behavior, indicating that they were implemented correctly.
+\section{Explicit Euler Method}
+\subsection{Implementation}
+The first version of Euler's method implemented was the explicit form. This method was implemented in python utilizing numpy arrays and for loops. See the attached code for details.
+\subsection{Behavior}
+While this method provided a decent approximation for the first few oscillations, the amplitude began to grow quickly. This behavior is displayed below:
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{xvt.png}
+\caption{\label{fig: x} Displacement for Explicit Euler Method}
+\end{figure}
+The velocity of the system followed a similar trend, with the maximum velocity quickly growing:
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{vvt.png}
+\caption{\label{fig: v} Velocity for Explicit Euler Method}
+\end{figure}
+\subsection{Error}
+A display of the error vs time for the system confirms that this behavior is due to a shortfall in the method. The error grows exponentially as time grows.
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{xerror.png}
+\caption{\label{fig: xerror} Displacement Error for Explicit Euler Method}
+\end{figure}
+One can see though, that error shrinks approximately linearly with decreased h.
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{Error_v_h.png}
+\caption{\label{fig: h} Error vs h}
+\end{figure}
+\subsection{Energy}
+A plot of the energy system shows that this method causes the system to gain energy. This obvious violation of conservation of energy exposes another serious flaw in the method.
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{ExplicitEnergy.png}
+\caption{\label{fig: Energy} Energy vs Time}
+\end{figure}
+\subsection{Phase Space}
+The Phase space of the system further shows the energy gain in the system:
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{ExplicitPhaseSpace.png}
+\caption{\label{fig: ePhaseSpace} Explicit Phase Space}
+\end{figure}
+\section{Implicit Euler Method}
+\section{Error}
+As opposed to explicit Euler, for the implicit method the springs oscillations damped out over time. This caused an increase in error bounded by the maximum amplitude of the real system. The loss of energy is also visible:
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{implicitError.png}
+\caption{\label{fig: iError} Implicit Error v Time}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{ImplicitPhaseSpace.png}
+\caption{\label{fig: iPhseSpace} Implicit Phase Space}
+\end{figure}
+\section{Symplectic Euler Method}
+\subsection{Phase-Space}
+It is clear from the below graphs that Symplectic Euler conserves phase space.
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{SymplecticPhaseSpace.png}
+\caption{\label{fig: sPhseSpace} Symplectic Phase Space}
+\end{figure}
+
+\end{document}
